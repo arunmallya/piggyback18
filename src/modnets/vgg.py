@@ -14,6 +14,7 @@ class VGG(nn.Module):
     def __init__(self, features, mask_init, mask_scale, threshold_fn, num_classes=1000):
         super(VGG, self).__init__()
         self.features = features
+        self.avgpool = nn.AdaptiveAvgPool2d((7, 7))
         self.classifier = nn.Sequential(
             nl.ElementWiseLinear(
                 512 * 7 * 7, 4096, mask_init=mask_init, mask_scale=mask_scale,
